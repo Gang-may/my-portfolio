@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Interactive Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -52,11 +55,14 @@
     <section id="hero" class="hero section">
         <div class="hero-content fade-in">
             <div class="hero-text">
-                <h1 class="hero-title">안녕하세요,<br><span class="highlight">황경민</span>입니다</h1>
+                <h1 class="hero-title">안녕하세요,<br><span class="highlight typing-text"></span></h1>
                 <p class="hero-desc">
                     데이터는 단순한 숫자의 나열이 아닙니다. 비즈니스의 불확실성을 해소하고 나아갈 방향을 제시하는 확실한 '근거'입니다.<br>저는 이 근거를 탐구하고 싶은 지원자 황경민입니다.
                 </p>
-                <div class="contact-info">
+                <div class="contact-actions">
+                    <a href="./assets/resume.pdf" class="btn btn-primary" download="황경민_이력서.pdf"><i class="fas fa-file-pdf"></i> 이력서 다운로드</a>
+                </div>
+                <div class="contact-info mt-4">
                     <p><i class="fas fa-phone"></i> 010-5540-8025</p>
                     <p><a href="#" id="email-link" class="email-link" data-email="kyoungmin712@naver.com"><i class="fas fa-envelope"></i> kyoungmin712@naver.com (Click to Copy)</a></p>
                 </div>
@@ -105,10 +111,42 @@
                             <li><span>자동차운전면허증 1종보통</span> <span class="provider">서울지방경찰청</span></li>
                         </ul>
                     </div>
+                    <div class="about-tech-stack mt-8">
+                        <h3 class="sub-title"><i class="fas fa-laptop-code"></i> Tech Stack</h3>
+                        <div class="tech-badges">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-badge"><i class="fas fa-database"></i> SQL</span>
+                            <span class="tech-badge"><i class="fas fa-chart-line"></i> R</span>
+                            <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" /> Pandas</span>
+                            <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="Numpy" /> Numpy</span>
+                            <span class="tech-badge"><i class="fas fa-file-excel"></i> Excel</span>
+                            <span class="tech-badge"><i class="fas fa-brain"></i> Machine Learning</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="about-skills">
-                    <h3 class="sub-title"><i class="fas fa-chart-pie"></i> Competency</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem;">
+                        <h3 class="sub-title" style="margin-bottom: 0;"><i class="fas fa-chart-pie"></i> Competency</h3>
+                        <span class="source-text" style="font-size: 0.85rem; color: var(--text-secondary);">출처: 사람인 인적성검사(26.02.26)</span>
+                    </div>
+
+                    <!-- 성격 프로파일 -->
+                    <div class="profile-box mb-4">
+                        <h4 class="profile-title">성격 프로파일</h4>
+                        <p class="profile-desc">성격 프로파일은 조직 생활이나 대인 관계에서 두드러지게 나타나는 성격 특성을 바탕으로 만들어집니다. 외향성, 원만성, 성실성의 수준을 기준으로 총 27가지 유형으로 나뉩니다.</p>
+                        
+                        <div class="profile-content">
+                            <h5 class="profile-type">EBR. 사회적인 관리자</h5>
+                            <div class="profile-tags">
+                                <span class="tag tag-plan">계획적인</span>
+                                <span class="tag tag-lead">주도적인</span>
+                                <span class="tag tag-innovative">혁신적인</span>
+                            </div>
+                            <p class="profile-detail">이 유형의 사람들은 주도적이고 활달한 성격에 치밀함과 신중함을 겸비한 리더 유형입니다. 여러 사람들과 잘 어울리며, 주도적으로 추진할 수 있는 일을 선호합니다. 이들은 감각적이고 호기심도 많아, 도전적인 과제가 주어질 때 더욱 몰입하고 열정적으로 업무에 임할 가능성이 높습니다. 능동적으로 일하는 태도와 리더십이 이들의 큰 강점입니다.</p>
+                        </div>
+                    </div>
+
                     <div class="competency-charts-container">
                         <!-- 1. 성격 진단결과 (Radar) -->
                         <div class="chart-box">
@@ -275,66 +313,48 @@
                 <div class="project-category">
                     <h3 class="category-title"><i class="fas fa-chart-line"></i> Data Analysis</h3>
                     <div class="project-cards">
-                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff802087b0cfcbc90c392c" target="_blank">
-                            <div class="project-card">
-                                <h4>'휴먼노이드' 뉴스기사 크롤링 프로젝트</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
-                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff80de9548e0afeba65302" target="_blank">
-                            <div class="project-card">
-                                <h4>군수품 입찰 현황 대시보드</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
-                        <a href="https://lilac-abacus-fc4.notion.site/2025-30c687ae97ff8099bb69fae2dd141423" target="_blank">
-                            <div class="project-card">
-                                <h4>2025년 데이터 문제해결은행 활용 경진대회</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
-                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff80f9960aec014014aa83" target="_blank">
-                            <div class="project-card">
-                                <h4>제주관광공사 데이터 활용 공모전</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
-                        <a href="https://lilac-abacus-fc4.notion.site/AI-GIS-30c687ae97ff8061a253c78e4a19551f" target="_blank">
-                            <div class="project-card">
-                                <h4>AI & GIS 전술 기반 전술적 교전 및 실시간 지원 시스템</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
+                        <div class="project-card" data-modal="modal-1">
+                            <h4>'휴먼노이드' 뉴스기사 크롤링 프로젝트</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
+                        <div class="project-card" data-modal="modal-2">
+                            <h4>군수품 입찰 현황 대시보드</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
+                        <div class="project-card" data-modal="modal-3">
+                            <h4>2025년 데이터 문제해결은행 활용 경진대회</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
+                        <div class="project-card" data-modal="modal-4">
+                            <h4>제주관광공사 데이터 활용 공모전</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
+                        <div class="project-card" data-modal="modal-5">
+                            <h4>AI & GIS 전술 기반 전술적 교전 및 실시간 지원 시스템</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
                     </div>
                 </div>
 
                 <div class="project-category">
                     <h3 class="category-title"><i class="fas fa-bullhorn"></i> Marketing</h3>
                     <div class="project-cards">
-                        <a href="https://lilac-abacus-fc4.notion.site/BAE-JUICE-30c687ae97ff80daa73ed99b8227ad3f" target="_blank">
-                            <div class="project-card">
-                                <h4>마케팅 전략 사례 &lt;BAE JUICE&gt;</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
-                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff80bfa7cfc09d7acc0f17" target="_blank">
-                            <div class="project-card">
-                                <h4>무인점포 시장 확대 방안</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
-                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff80cbb6e6cfa566d8c215" target="_blank">
-                            <div class="project-card">
-                                <h4>부영-사랑으로 부영 리브랜딩</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
-                        <a href="https://lilac-abacus-fc4.notion.site/Notion-30c687ae97ff80e8bd0ce18b2d6af8d6" target="_blank">
-                            <div class="project-card">
-                                <h4>Notion 광고</h4>
-                                <i class="fas fa-arrow-right card-arrow"></i>
-                            </div>
-                        </a>
+                        <div class="project-card" data-modal="modal-6">
+                            <h4>마케팅 전략 사례 &lt;BAE JUICE&gt;</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
+                        <div class="project-card" data-modal="modal-7">
+                            <h4>무인점포 시장 확대 방안</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
+                        <div class="project-card" data-modal="modal-8">
+                            <h4>부영-사랑으로 부영 리브랜딩</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
+                        <div class="project-card" data-modal="modal-9">
+                            <h4>Notion 광고</h4>
+                            <i class="fas fa-search-plus card-icon"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -347,6 +367,14 @@
         <i class="fas fa-check-circle"></i> 이메일이 복사되었습니다!
     </div>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Project Modals Container -->
+    <div id="modal-container" class="modal-overlay"></div>
+
     <!-- Footer -->
     <footer class="footer">
         <p>끝까지 읽어 봐주셔서 감사합니다!</p>
@@ -357,3 +385,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
