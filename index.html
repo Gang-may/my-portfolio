@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>황경민 | Portfolio</title>
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="황경민 - Data Analyst Portfolio">
+    <meta property="og:description" content="데이터는 단순한 숫자의 나열이 아닙니다. 이면의 숨겨진 의미를 찾고, 수치 이상의 가치를 발견하는 것이 데이터 분석의 본질이라고 생각합니다.">
+    <!-- Image URL should point to your hosted site's image path -->
+    <meta property="og:image" content="./assets/my-photo.jpg">
+    <meta property="og:url" content="https://kyungmin-portfolio.web.app">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Pretendard for Korean, Inter for English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" />
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">H. Kyung-min</a>
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon dark-icon"></i>
+                        <i class="fas fa-sun light-icon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+        <div class="hero-content fade-in">
+            <div class="hero-text">
+                <h1 class="hero-title">안녕하세요,<br><span class="highlight">황경민</span>입니다</h1>
+                <p class="hero-desc">
+                    데이터는 단순한 숫자의 나열이 아닙니다. 비즈니스의 불확실성을 해소하고 나아갈 방향을 제시하는 확실한 '근거'입니다.<br>저는 이 근거를 탐구하고 싶은 지원자 황경민입니다.
+                </p>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> 010-5540-8025</p>
+                    <p><a href="#" id="email-link" class="email-link" data-email="kyoungmin712@naver.com"><i class="fas fa-envelope"></i> kyoungmin712@naver.com (Click to Copy)</a></p>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="img-wrapper">
+                    <img src="./assets/my-photo.jpg" alt="황경민" id="profile-img" onerror="this.src='https://via.placeholder.com/400x400/3b82f6/ffffff?text=Profile'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Education, Certificates, Skills Chart) -->
+    <section id="about" class="about section">
+        <div class="section-container fade-in">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                
+                <div class="about-info">
+                    <div class="about-education">
+                        <h3 class="sub-title"><i class="fas fa-graduation-cap"></i> Education</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h4>스마트 국방 데이터 분석과정 (한화에어로스페이스) <span class="badge">수료</span></h4>
+                                <span class="date">2025.07 ~ 2026.01 | 한국표준협회</span>
+                                <p>파이썬 프로그래밍, 데이터 수집, SQL, 데이터베이스 구현, 빅데이터 처리, 데이터 전처리(Numpy, Pandas), 데이터 시각화, 데이터 탐색과 통계분석(Python, R), 머신러닝, 딥러닝, 분석 서비스 개발 및 배포.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>강서대학교 <span class="badge">졸업</span></h4>
+                                <span class="date">2020.03 ~ 2026.02</span>
+                                <p>G2빅데이터경영학과 | 학점: 3.99 / 4.5<br>마케팅&회계, 빅데이터 트랙 수강.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>마포고등학교 <span class="badge">졸업</span></h4>
+                                <span class="date">2016.03 ~ 2019.02</span>
+                                <p>과학중점반, 통기타 동아리 활동.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-certificates mt-8">
+                        <h3 class="sub-title certificate-title"><i class="fas fa-award"></i> Certificates</h3>
+                        <ul class="certificate-list">
+                            <li><span>데이터분석준전문가 (ADsP)</span> <span class="provider">한국데이터산업진흥원</span></li>
+                            <li><span>유통관리사 3급</span> <span class="provider">대한상공회의소</span></li>
+                            <li><span>자동차운전면허증 1종보통</span> <span class="provider">서울지방경찰청</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="about-skills">
+                    <h3 class="sub-title"><i class="fas fa-chart-pie"></i> Competency</h3>
+                    <div class="competency-charts-container">
+                        <!-- 1. 성격 진단결과 (Radar) -->
+                        <div class="chart-box">
+                            <h4 class="chart-box-title">성격 진단결과</h4>
+                            <p class="chart-box-desc">성격(Personality)은 개인이 행동하고, 느끼고, 생각하는 독특한 방식을 의미합니다.</p>
+                            <div class="canvas-wrapper">
+                                <canvas id="personalityChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 2. 인지능력 종합 점수 (Radar) -->
+                        <div class="chart-box">
+                            <div class="chart-box-header">
+                                <h4 class="chart-box-title">종합결과</h4>
+                                <span class="cognitive-score">인지능력 종합 점수 <strong class="highlight">63</strong></span>
+                            </div>
+                            <p class="chart-box-desc">인지능력(Cognitive ability)은 개인의 활동과 밀접하게 연관된 정신적 처리 과정을 의미하며, 조직에서 구성원의 성과를 예측하는 대표적 요인입니다.</p>
+                            <div class="canvas-wrapper">
+                                <canvas id="cognitiveChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 3. 성격강점 (Horizontal Bars) -->
+                        <div class="chart-box">
+                            <h4 class="chart-box-title text-center">강점</h4>
+                            <div class="strengths-list">
+                                <!-- Bar 1 -->
+                                <div class="strength-item">
+                                    <div class="strength-header">
+                                        <span class="rank">1위 체계성</span>
+                                        <div class="score-info"><strong>83점</strong> | 평균 55점</div>
+                                    </div>
+                                    <p class="strength-desc">계획에 따라 철저하고 꼼꼼하게 일을 수행하는 성향</p>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-cyan" style="width: 83%;"></div>
+                                        <div class="avg-marker" style="left: 55%;"></div>
+                                    </div>
+                                </div>
+                                <!-- Bar 2 -->
+                                <div class="strength-item">
+                                    <div class="strength-header">
+                                        <span class="rank">2위 주도성</span>
+                                        <div class="score-info"><strong>80점</strong> | 평균 55점</div>
+                                    </div>
+                                    <p class="strength-desc">사람들을 리드하며 상황을 주도하는 성향</p>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-teal" style="width: 80%;"></div>
+                                        <div class="avg-marker" style="left: 55%;"></div>
+                                    </div>
+                                </div>
+                                <!-- Bar 3 -->
+                                <div class="strength-item">
+                                    <div class="strength-header">
+                                        <span class="rank">3위 비관습성</span>
+                                        <div class="score-info"><strong>73점</strong> | 평균 55점</div>
+                                    </div>
+                                    <p class="strength-desc">새로운 방식을 시도하며 변화를 즐기는 성향</p>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-blue" style="width: 73%;"></div>
+                                        <div class="avg-marker" style="left: 55%;"></div>
+                                    </div>
+                                </div>
+                                <!-- Bar 4 -->
+                                <div class="strength-item">
+                                    <div class="strength-header">
+                                        <span class="rank">4위 이타성</span>
+                                        <div class="score-info"><strong>69점</strong> | 평균 55점</div>
+                                    </div>
+                                    <p class="strength-desc">사람들을 도와주면서 만족감과 행복을 느끼는 성향</p>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-purple" style="width: 69%;"></div>
+                                        <div class="avg-marker" style="left: 55%;"></div>
+                                    </div>
+                                </div>
+                                <!-- Bar 5 -->
+                                <div class="strength-item">
+                                    <div class="strength-header">
+                                        <span class="rank">5위 사교성</span>
+                                        <div class="score-info"><strong>69점</strong> | 평균 55점</div>
+                                    </div>
+                                    <p class="strength-desc">사람들과 어울리고 이야기하기를 좋아하는 성향</p>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-teal-dark" style="width: 69%;"></div>
+                                        <div class="avg-marker" style="left: 55%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience section">
+        <div class="section-container fade-in">
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="accordion" id="exp-accordion">
+                <!-- Work Experience -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span><i class="fas fa-briefcase"></i> 아르바이트 (Work)</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <ul class="exp-list">
+                            <li><strong>글로벌넥트웍스</strong> (2024.11 ~ 2025.07) - 알뜰폰 개통팀</li>
+                            <li><strong>크라운호프 양천향교역점</strong> (2024.04 ~ 2024.10) - 홀 서빙</li>
+                            <li><strong>먼투썬피자 양천향교역점</strong> (2023.03 ~ 2024.02) - 음식 제작 및 포장</li>
+                            <li><strong>다빈M</strong> (2022.09 ~ 2022.12) - 공가관리팀</li>
+                            <li><strong>대한곱창 마곡나루역점</strong> (2020.03 ~ 2021.01) - 홀 서빙</li>
+                            <li><strong>SC컨벤션</strong> (2018.12 ~ 2019.04) - 홀 서빙</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Volunteer -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span><i class="fas fa-hands-helping"></i> 해외봉사 (Volunteer)</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="exp-details">
+                            <h4>일본 나가노 | 더 멋진 세상</h4>
+                            <span class="date">2019.11.25 ~ 2019.11.29</span>
+                            <p>태풍 하기비스로 인해 일본 나가노현에 대규모 침수 피해가 발생했을 당시, 소속 교회를 통해 현지로 건너가 수해 복구 봉사활동에 참여했습니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language Study -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span><i class="fas fa-globe"></i> 어학연수 (Language Study)</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="exp-details">
+                            <h4>산호세대학교 ESL Center</h4>
+                            <span class="date">2024.01.01 ~ 2026.01.26</span>
+                            <ul class="ml-4 list-disc mt-2">
+                                <li>매일 8시간씩 수업 진행 (1:1 수업, 토론수업), 모의 토익 2번 진행.</li>
+                                <li>영어 회화 및 리스닝 역량 향상, 필리핀 문화 이해도 향상.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section">
+        <div class="section-container fade-in">
+            <h2 class="section-title">Projects</h2>
+            
+            <div class="projects-grid">
+                
+                <div class="project-category">
+                    <h3 class="category-title"><i class="fas fa-chart-line"></i> Data Analysis</h3>
+                    <div class="project-cards">
+                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff802087b0cfcbc90c392c" target="_blank">
+                            <div class="project-card">
+                                <h4>'휴먼노이드' 뉴스기사 크롤링 프로젝트</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff80de9548e0afeba65302" target="_blank">
+                            <div class="project-card">
+                                <h4>군수품 입찰 현황 대시보드</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                        <a href="https://lilac-abacus-fc4.notion.site/2025-30c687ae97ff8099bb69fae2dd141423" target="_blank">
+                            <div class="project-card">
+                                <h4>2025년 데이터 문제해결은행 활용 경진대회</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff80f9960aec014014aa83" target="_blank">
+                            <div class="project-card">
+                                <h4>제주관광공사 데이터 활용 공모전</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                        <a href="https://lilac-abacus-fc4.notion.site/AI-GIS-30c687ae97ff8061a253c78e4a19551f" target="_blank">
+                            <div class="project-card">
+                                <h4>AI & GIS 전술 기반 전술적 교전 및 실시간 지원 시스템</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-category">
+                    <h3 class="category-title"><i class="fas fa-bullhorn"></i> Marketing</h3>
+                    <div class="project-cards">
+                        <a href="https://lilac-abacus-fc4.notion.site/BAE-JUICE-30c687ae97ff80daa73ed99b8227ad3f" target="_blank">
+                            <div class="project-card">
+                                <h4>마케팅 전략 사례 &lt;BAE JUICE&gt;</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff80bfa7cfc09d7acc0f17" target="_blank">
+                            <div class="project-card">
+                                <h4>무인점포 시장 확대 방안</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                        <a href="https://lilac-abacus-fc4.notion.site/30c687ae97ff80cbb6e6cfa566d8c215" target="_blank">
+                            <div class="project-card">
+                                <h4>부영-사랑으로 부영 리브랜딩</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                        <a href="https://lilac-abacus-fc4.notion.site/Notion-30c687ae97ff80e8bd0ce18b2d6af8d6" target="_blank">
+                            <div class="project-card">
+                                <h4>Notion 광고</h4>
+                                <i class="fas fa-arrow-right card-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i> 이메일이 복사되었습니다!
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>끝까지 읽어 봐주셔서 감사합니다!</p>
+        <p class="copyright">© 2026 Kyung-min Hwang. All rights reserved.</p>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
