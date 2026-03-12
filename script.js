@@ -430,31 +430,44 @@ class Star {
     }
     
     update() {
-        // Mouse interaction (pull effect)
+        // Mouse interaction (pull and swirl effect)
         if (mouse.x != null && mouse.y != null) {
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
-            let forceDirectionX = dx / distance;
-            let forceDirectionY = dy / distance;
-            let maxDistance = 250; // Radius of attraction
-            let force = (maxDistance - distance) / maxDistance;
-            let directionX = forceDirectionX * force * this.density;
-            let directionY = forceDirectionY * force * this.density;
-
+            
+            let maxDistance = 300; // Radius of attraction
+            
             if (distance < maxDistance) {
-                // Pulling towards the mouse cursor
-                this.x += directionX * 0.8;
-                this.y += directionY * 0.8;
+                // Sucking inward
+                let force = (maxDistance - distance) / maxDistance;
+                let pullStrength = force * (this.density / 10);
+                
+                // Spiral tangential force
+                let angle = Math.atan2(dy, dx);
+                let spiralAngle = angle + (Math.PI / 2.5); // Slightly inward spiral
+                
+                let tgtX = this.x + (Math.cos(spiralAngle) * 8 * force) + (dx * pullStrength * 0.15);
+                let tgtY = this.y + (Math.sin(spiralAngle) * 8 * force) + (dy * pullStrength * 0.15);
+                
+                this.x += (tgtX - this.x) * 0.4;
+                this.y += (tgtY - this.y) * 0.4;
+                
+                // Increase speed and density near the center
+                if (distance < 20) {
+                     this.x = mouse.x + (Math.random() - 0.5) * 40;
+                     this.y = mouse.y + (Math.random() - 0.5) * 40;
+                }
+                
             } else {
                 // Return to original position if mouse is far
                 if (this.x !== this.baseX) {
                     let dxObj = this.x - this.baseX;
-                    this.x -= dxObj / 20;
+                    this.x -= dxObj / 40;
                 }
                 if (this.y !== this.baseY) {
                     let dyObj = this.y - this.baseY;
-                    this.y -= dyObj / 20;
+                    this.y -= dyObj / 40;
                 }
             }
         } else {
@@ -542,3 +555,4 @@ function updateChartTheme(chart, theme) {
     
     chart.update();
 }
+
