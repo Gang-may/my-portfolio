@@ -604,6 +604,72 @@ function trackUserActions() {
       console.log(`[행동 추적] 프로젝트 클릭됨: ${projectName}`);
     });
   });
+
+// 4. 노션 '자세히 보기' 버튼 클릭 추적 및 체류 시간 계산
+
+  // [A] 떠날 때: 버튼 클릭 시 현재 시간 저장하기
+  const notionButtons = document.querySelectorAll('a[href*="notion"]');
+  
+  notionButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const cardElement = btn.closest('.project-card') || btn.closest('.modal-content');
+      let projectName = '알 수 없는 프로젝트';
+      if (cardElement) {
+        const titleElement = cardElement.querySelector('h4') || cardElement.querySelector('h3');
+        if (titleElement) projectName = titleElement.innerText;
+      }
+
+      // 1. 클릭한 현재 시간(밀리초)과 프로젝트 이름을 브라우저에 저장
+      localStorage.setItem('notion_departure_time', Date.now());
+      localStorage.setItem('notion_project_name', projectName);
+
+      // 2. 떠났다는 사실도 GTM으로 전송 (옵션)
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'notion_button_click',
+        'project_name': projectName
+      });
+      console.log(`[행동 추적] 노션으로 떠남: ${projectName}`);
+    });
+  });
+
+  // [B] 돌아왔을 때: 탭으로 다시 돌아온 순간을 감지하고 시간 계산하기
+  function checkReturnFromNotion() {
+    const departureTime = localStorage.getItem('notion_departure_time');
+    const projectName = localStorage.getItem('notion_project_name');
+
+    // 출발 기록이 저장되어 있다면 (즉, 노션에 갔다가 방금 돌아온 것이라면)
+    if (departureTime && projectName) {
+      const returnTime = Date.now();
+      // 밀리초(ms) 단위이므로 1000으로 나누어 초(Seconds) 단위로 변환합니다.
+      const timeSpentSeconds = Math.floor((returnTime - parseInt(departureTime, 10)) / 1000);
+
+      // GTM으로 체류 시간 데이터 전송
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'return_from_notion',
+        'project_name': projectName,
+        'time_spent_seconds': timeSpentSeconds // 계산된 체류 시간(초)
+      });
+
+      console.log(`[행동 추적] 노션에서 돌아옴! (${projectName} / 체류 시간: ${timeSpentSeconds}초)`);
+
+      // 다음 방문을 위해 기록을 깨끗하게 지워줍니다. (중복 전송 방지)
+      localStorage.removeItem('notion_departure_time');
+      localStorage.removeItem('notion_project_name');
+    }
+  }
+
+  // 사용자가 다른 탭(노션)을 보다가 다시 우리 탭(포트폴리오)으로 돌아왔을 때 실행
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+      checkReturnFromNotion();
+    }
+  });
+
+  // (예외 처리) 노션 창을 아예 닫고 우리 사이트를 새로고침 했을 때 실행
+  checkReturnFromNotion();
+    
 }
 
 // HTML 문서가 완전히 로드된 후에 추적 로직을 실행합니다.
