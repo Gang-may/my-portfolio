@@ -556,3 +556,56 @@ function updateChartTheme(chart, theme) {
     chart.update();
 }
 
+// --- 방문자 행동 추적 로직 ---
+function trackUserActions() {
+  
+  // 1. 테마(다크모드/라이트모드) 변경 버튼 클릭 추적
+  const themeBtn = document.getElementById('theme-toggle');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function() {
+      // 현재 테마가 무엇으로 바뀌었는지 확인 (예: light -> dark)
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'theme_toggle_click',
+        'theme_state': currentTheme 
+      });
+      console.log('[행동 추적] 테마 변경 버튼 클릭됨:', currentTheme);
+    });
+  }
+
+  // 2. 이메일 주소 복사 클릭 추적
+  const emailLink = document.getElementById('email-link');
+  if (emailLink) {
+    emailLink.addEventListener('click', function() {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'email_copy_click'
+      });
+      console.log('[행동 추적] 이메일 주소 복사됨');
+    });
+  }
+
+  // 3. 프로젝트 카드 클릭 추적 (가장 중요!)
+  // 화면에 있는 모든 'project-card' 클래스를 가진 요소들을 찾습니다.
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  projectCards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      // 클릭한 카드의 h4 태그(프로젝트 제목) 글자를 가져옵니다.
+      const projectName = card.querySelector('h4').innerText; 
+      
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'project_card_click',
+        'project_name': projectName // 어떤 프로젝트를 클릭했는지 이름도 같이 보냅니다.
+      });
+      console.log(`[행동 추적] 프로젝트 클릭됨: ${projectName}`);
+    });
+  });
+}
+
+// HTML 문서가 완전히 로드된 후에 추적 로직을 실행합니다.
+document.addEventListener('DOMContentLoaded', trackUserActions);
+
