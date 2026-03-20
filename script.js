@@ -675,3 +675,26 @@ function trackUserActions() {
 // HTML 문서가 완전히 로드된 후에 추적 로직을 실행합니다.
 document.addEventListener('DOMContentLoaded', trackUserActions);
 
+// --- 회사별 맞춤 링크 추적 (동적 할당 방식) ---
+function trackCompanyDynamic() {
+  // 1. 주소창에서 '?c=' 뒤에 있는 파라미터 값을 읽어옵니다.
+  const urlParams = new URLSearchParams(window.location.search);
+  const companyName = urlParams.get('c'); 
+
+  // 2. 파라미터 값이 존재할 때만 작동합니다.
+  if (companyName) {
+    // GTM 데이터 바구니로 회사 이름을 그대로 전송!
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'company_visit',
+      'visitor_company': companyName 
+    });
+    
+    // 콘솔창에서 잘 작동하는지 확인
+    console.log(`[행동 추적] 인사담당자 방문 감지: ${companyName}`);
+  }
+}
+
+// 브라우저 로딩이 끝나면 함수를 실행합니다.
+document.addEventListener('DOMContentLoaded', trackCompanyDynamic);
+
