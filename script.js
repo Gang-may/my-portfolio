@@ -653,36 +653,30 @@ function trackUserActions() {
     });
   });
 
-  // 4. 노션 '자세히 보기' 버튼 클릭 추적 및 체류 시간 계산 (업그레이드 버전)
+  // 4. 노션 '자세히 보기' 버튼 클릭 추적 및 체류 시간 계산 (동적 모달 대응 버전)
 
-  // [A] 떠날 때: 버튼 클릭 시 현재 시간 저장하기
-  // href에 'notion.site'가 포함된 모든 링크를 찾습니다.
-  const notionButtons = document.querySelectorAll(
-    'a[href*="notion.site"], a[href*="notion.so"]',
-  );
+  // [A] 떠날 때: 문서 전체에서 노션 링크 클릭을 감시 (이벤트 위임)
+  document.addEventListener('click', function (e) {
+    // 클릭된 요소가 노션 버튼인지, 혹은 노션 버튼 안의 아이콘인지 확인
+    const btn = e.target.closest('a[href*="notion.site"], a[href*="notion.so"]');
+    
+    if (btn) {
+      // 프로젝트 카드 클릭 이벤트가 중복 발생하지 않도록 방지
+      // e.stopPropagation(); 
 
-  notionButtons.forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      // 이벤트 전파 방지 (프로젝트 카드 클릭 이벤트와 겹치지 않게 함)
-      // e.stopPropagation(); // 필요시 주석 해제
-
-      const cardElement =
-        btn.closest(".project-card") ||
-        btn.closest(".modal-content") ||
-        btn.parentElement;
-      let projectName = "알 수 없는 프로젝트";
+      // 가장 가까운 부모 요소에서 프로젝트 제목 찾기
+      const cardElement = btn.closest('.modal-content') || btn.closest('.project-card');
+      let projectName = '알 수 없는 프로젝트';
 
       if (cardElement) {
-        const titleElement =
-          cardElement.querySelector("h4") ||
-          cardElement.querySelector("h3") ||
-          cardElement.querySelector(".project-title");
+        // 모달이면 .modal-title을, 카드면 h4를 찾습니다.
+        const titleElement = cardElement.querySelector('.modal-title') || cardElement.querySelector('h4');
         if (titleElement) projectName = titleElement.innerText.trim();
       }
 
-      // 1. 클릭한 시간과 프로젝트 이름을 저장
-      localStorage.setItem("notion_departure_time", Date.now());
-      localStorage.setItem("notion_project_name", projectName);
+      // 1. 현재 시간과 프로젝트 이름을 로컬 스토리지에 저장
+      localStorage.setItem('notion_departure_time', Date.now());
+      localStorage.setItem('notion_project_name', projectName);
 
       // 2. GTM 데이터 전송
       window.dataLayer = window.dataLayer || [];
@@ -692,21 +686,18 @@ function trackUserActions() {
       });
 
       console.log(`[행동 추적] 노션으로 떠남 확인: ${projectName}`);
-    });
+    }
   });
 
-  // [B] 돌아왔을 때 계산 로직 (기존과 동일하지만 안전하게 다시 배치)
+  // [B] 돌아왔을 때 계산 로직
   function checkReturnFromNotion() {
-    const departureTime = localStorage.getItem("notion_departure_time");
-    const projectName = localStorage.getItem("notion_project_name");
+    const departureTime = localStorage.getItem('notion_departure_time');
+    const projectName = localStorage.getItem('notion_project_name');
 
     if (departureTime && projectName) {
       const returnTime = Date.now();
-      const timeSpentSeconds = Math.floor(
-        (returnTime - parseInt(departureTime, 10)) / 1000,
-      );
+      const timeSpentSeconds = Math.floor((returnTime - parseInt(departureTime, 10)) / 1000);
 
-      // 최소 1초 이상 머물렀을 때만 기록 (실수 클릭 방지)
       if (timeSpentSeconds >= 1) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -715,14 +706,11 @@ function trackUserActions() {
           time_spent_seconds: timeSpentSeconds,
         });
 
-        console.log(
-          `[행동 추적] 노션에서 돌아옴! (${projectName} / 체류 시간: ${timeSpentSeconds}초)`,
-        );
+        console.log(`[행동 추적] 노션에서 돌아옴! (${projectName} / 체류 시간: ${timeSpentSeconds}초)`);
       }
 
-      // 기록 삭제
-      localStorage.removeItem("notion_departure_time");
-      localStorage.removeItem("notion_project_name");
+      localStorage.removeItem('notion_departure_time');
+      localStorage.removeItem('notion_project_name');
     }
   }
 
@@ -735,7 +723,6 @@ function trackUserActions() {
 
   // 새로고침 대비
   checkReturnFromNotion();
-}
 
 // HTML 문서가 완전히 로드된 후에 추적 로직을 실행합니다.
 document.addEventListener("DOMContentLoaded", trackUserActions);
